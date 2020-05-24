@@ -1,0 +1,28 @@
+/// Date : Sunday, May 24, 2020
+/// Task : http://poj.org/problem?id=2479
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+const int OO = (int) 1e9;
+
+int main() {
+  int t;
+  scanf("%d", &t);
+  while (t--) {
+    int n, mn = 0, sol = -OO, mx = -OO, p = 0, dp = -OO;
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++) {
+      int x;
+      scanf("%d", &x);
+      p += x;
+      dp = max(dp, p - mn);
+      mn = min(mn, p);
+      sol = max(sol, mx + p);
+      mx = max(mx, dp - p);
+    }
+    printf("%d\n", sol);
+  }
+  return 0;
+}
