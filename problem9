@@ -1,0 +1,58 @@
+/// Date : Sunday, May 25, 2020
+/// Task : https://codeforces.com/contest/1360/problem/G
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+typedef long double ld;
+
+const int N = 50 + 7;
+int mt[N][N], need[N];
+
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(0);
+  int t;
+  cin >> t;
+  while (t--) {
+    int n, m, a, b;
+    cin >> n >> m >> a >> b;
+    if (n * a != m * b) {
+      cout << "NO\n";
+      continue;
+    }
+    for (int i = 1; i <= n; i++) {
+      need[i] = a;
+    }
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= m; j++) {
+        mt[i][j] = 0;
+      }
+    }
+    for (int j = 1; j <= m; j++) {
+      vector<pair<int, int>> ord;
+      for (int i = 1; i <= n; i++) {
+        ord.push_back({need[i], i});
+      }
+      sort(ord.rbegin(), ord.rend());
+      int put = 0;
+      for (auto &it : ord) {
+        mt[it.second][j] = 1;
+        need[it.second]--;
+        put++;
+        if (put == b) {
+          break;
+        }
+      }
+    }
+    cout << "YES\n";
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= m; j++) {
+        cout << mt[i][j];
+      }
+      cout << "\n";
+    }
+  }
+  return 0;
+}
