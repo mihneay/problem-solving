@@ -1,0 +1,42 @@
+/// Date : Sunday, May 25, 2020
+/// Task : https://codeforces.com/contest/1360/problem/E
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+typedef long double ld;
+
+const int N = 50 + 7;
+int n, a[N][N];
+
+void st() {
+  cin >> n;
+  for (int i = 1; i <= n; i++) {
+    string s;
+    cin >> s;
+    for (int j = 1; j <= n; j++) {
+      a[i][j] = s[j - 1] - '0';
+    }
+  }
+  for (int i = 1; i < n; i++) {
+    for (int j = 1; j < n; j++) {
+      if (a[i][j] && !a[i + 1][j] && !a[i][j + 1]) {
+        cout << "NO\n";
+        return;
+      }
+    }
+  }
+  cout << "YES\n";
+}
+
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(0);
+  int t;
+  cin >> t;
+  while (t--) {
+    st();
+  }
+  return 0;
+}
