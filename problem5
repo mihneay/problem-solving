@@ -1,0 +1,57 @@
+/// Date : Sunday, May 25, 2020
+/// Task : https://codeforces.com/contest/1360/problem/C
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+typedef long double ld;
+
+int f[107];
+
+void test() {
+  int even = 0, odd = 0;
+  for (int i = 1; i <= 100; i++) {
+    if (f[i]) {
+      if (i % 2 == 0) {
+        even += f[i];
+      } else {
+        odd += f[i];
+      }
+    }
+  }
+  if (even % 2 == 0 && odd % 2 == 0) {
+    cout << "YES\n";
+    return;
+  }
+  if (even % 2 == 1 && odd % 2 == 1) {
+    for (int i = 1; i <= 100; i++) {
+      if (f[i] && f[i + 1]) {
+        cout << "YES\n";
+        return;
+      }
+    }
+  }
+  cout << "NO\n";
+}
+
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(0);
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    for (int i = 1; i <= 100; i++) {
+      f[i] = 0;
+    }
+    for (int i = 1; i <= n; i++) {
+      int x;
+      cin >> x;
+      f[x]++;
+    }
+    test();
+  }
+  return 0;
+}
