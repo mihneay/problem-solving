@@ -1,0 +1,86 @@
+/// Date : Sunday, May 25, 2020
+/// Task : https://codeforces.com/contest/1360/problem/H
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+typedef long double ld;
+
+ll n, m;
+vector<ll> a;
+
+ll smaller_del(ll x) {
+  ll l = 0, r = n - 1, sol = 0;
+  while (l <= r) {
+    ll m = (l + r) / 2;
+    if (a[m] <= x) {
+      sol = m + 1;
+      l = m + 1;
+    } else {
+      r = m - 1;
+    }
+  }
+  return sol;
+}
+
+ll smaller_not_del(ll x) {
+  return x + 1 - smaller_del(x);
+}
+
+void pen(ll x) {
+  for (ll j = m - 1; j >= 0; j--) {
+    if ((1LL << j) & x) {
+      cout << 1;
+    } else {
+      cout << 0;
+    }
+  }
+}
+
+int tc = 0;
+
+void st() {
+  tc++;
+  cin >> n >> m;
+  a.clear();
+  a.resize(n);
+  for (ll i = 0; i < n; i++) {
+    string s;
+    cin >> s;
+    reverse(s.begin(), s.end());
+    ll foo = 0;
+    for (ll j = 0; j < m; j++) {
+      if (s[j] == '1') {
+        foo ^= (1LL << j);
+      }
+    }
+    a[i] = foo;
+  }
+  sort(a.begin(), a.end());
+  ll k = (1LL << m) - n;
+  k = (k - 1) / 2 + 1;
+  ll l = 0, r = (1LL << m) - 1, sol = -1;
+  while (l <= r) {
+    ll md = (l + r) / 2;
+    if (smaller_not_del(md) < k) {
+      sol = md;
+      l = md + 1;
+    } else {
+      r = md - 1;
+    }
+  }
+  pen(sol + 1);
+  cout << "\n";
+}
+
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(0);
+  ll t;
+  cin >> t;
+  while (t--) {
+    st();
+  }
+  return 0;
+}
