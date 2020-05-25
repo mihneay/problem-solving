@@ -1,0 +1,69 @@
+/// Date : Sunday, May 25, 2020
+/// Task : https://codeforces.com/contest/1360/problem/F
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+typedef long double ld;
+
+bool ok(string a, string b) {
+  int cnt = 0, n = (int) a.size();
+  for (int i = 0; i < n; i++) {
+    if (a[i] != b[i]) {
+      cnt++;
+      if (cnt == 2) {
+        return 0;
+      }
+    }
+  }
+  return 1;
+}
+
+int n, l;
+vector<string> a;
+
+bool ok(string s) {
+  for (int i = 0; i < n; i++) {
+    if (!ok(a[i], s)) {
+      return 0;
+    }
+  }
+  return 1;
+}
+
+void st() {
+  cin >> n >> l;
+  a.clear();
+  a.resize(n);
+  for (int i = 0; i < n; i++) {
+    cin >> a[i];
+  }
+  if (ok(a[0])) {
+    cout << a[0] << "\n";
+    return;
+  }
+  for (int i = 0; i < l; i++) {
+    char init = a[0][i];
+    for (char c = 'a'; c <= 'z'; c++) {
+      a[0][i] = c;
+      if (ok(a[0])) {
+        cout << a[0] << "\n";
+        return;
+      }
+    }
+    a[0][i] = init;
+  }
+  cout << "-1\n";
+}
+
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(0);
+  int t;
+  cin >> t;
+  while (t--) {
+    st();
+  }
+  return 0;
+}
