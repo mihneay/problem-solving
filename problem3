@@ -1,0 +1,22 @@
+/// Date : Sunday, May 25, 2020
+/// Task : https://codeforces.com/contest/1360/problem/A
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+typedef long double ld;
+
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(0);
+  int t;
+  cin >> t;
+  while (t--) {
+    ll a, b;
+    cin >> a >> b;
+    ll r = min(max(2 * a, b), max(2 * b, a));
+    cout << r * r << "\n";
+  }
+  return 0;
+}
